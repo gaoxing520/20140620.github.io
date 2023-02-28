@@ -1,0 +1,28 @@
+baseURL = 'https://20140620.xyz/'
+languageCode = 'zh-cn'
+title = '懒宅++'
+theme =  "PaperMod"
+
+[Params]
+  mainSections = ["posts"]
+  email = "gao.jin.gan.gmail"
+  intro = true
+
+[taxonomies]
+  tag = "tags"
+  series = "series"
+  category = "categories"
+
+[menu]
+  [[menu.main]]
+    name = "主页"
+    identifier = "index"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    title =  "关于"
+    name = "关于"
+    identifier = "about"
+    url = "/about/"
+    weight = 2
