@@ -16,6 +16,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
 )
@@ -24,6 +25,11 @@ func main() {
 	var (
 		maxID int
 	)
+
+	if runtime.GOOS != "linux" {
+		fmt.Println("This program can only run on Linux.")
+		os.Exit(1)
+	}
 
 	data, err := os.ReadFile("/proc/cpuinfo")
 	if err != nil {
@@ -48,6 +54,39 @@ func main() {
 	}
 
 	fmt.Printf("Physical CPUs: %d\n", maxID+1)
+}
+
+```
+
+```rust
+use std::fs;
+use std::process;
+
+fn main() {
+    if std::env::consts::OS != "linux" {
+        eprintln!("This program can only run on Linux.");
+        process::exit(1);
+    }
+
+    let mut max_id: i32 = 0;
+
+    let data = fs::read_to_string("/proc/cpuinfo").expect("Failed to read cpuinfo file");
+    // println!("{}", data);
+    
+    for line in data.lines() {
+        if line.contains("physical id") {
+            let fields: Vec<&str> = line.split_whitespace().collect();
+            if fields.len() >= 4 {
+                if let Ok(id) = fields[3].parse::<i32>() {
+                    if id > max_id {
+                        max_id = id;
+                    }
+                }
+            }
+        }
+    }
+
+    println!("Physical CPUs: {}", max_id + 1);
 }
 
 ```
