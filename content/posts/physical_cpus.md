@@ -5,9 +5,9 @@ draft: false
 ---
 
 ## linux下获取物理CPU的颗数
-* golang 环境
-* 如果是获取逻辑 cpu 数, 也就是 cores, 直接用`runtime.NumCPU()`就可以了
-* golang没有标准库可以直接获取物理CPU颗数
+* `golang`/`rust`环境
+* 如果是获取逻辑 cpu 数, 也就是 `cores`, 直接用`golang`的`runtime.NumCPU()`就可以了
+* `golang`没有标准库可以直接获取物理CPU颗数
 * 我们可以分析`/proc/cpuinfo`的`physical id`来计算, 下面是 demo 程序
 
 ```go
@@ -58,6 +58,7 @@ func main() {
 
 ```
 
+* 简单的 rust 实现
 ```rust
 use std::fs;
 use std::process;
